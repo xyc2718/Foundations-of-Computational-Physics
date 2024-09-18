@@ -137,18 +137,19 @@ def hybrid_method(f, df, rg, tol=1e-15, max_iter=100):
         print("The hybrid method did not converge after", max_iter, "iterations.")
     return x, abs(dx)
 
-fig = plt.figure()
-bracket = find_bracket(f, [-3, 3], n=10, ifplot=True) #get bracket and plot
-bracket = bracket[1::] # Only take the positive interval
-plt.xlabel("x")
-plt.ylabel("f(x)")
-plt.title("f(x) with bracket")
-plt.legend(["f(x)", "bracket"])
-fig.savefig("f(x) with bracket.png", dpi=600) #save figure
-
-nsol = len(bracket)
 
 if __name__ == "__main__":
+    fig = plt.figure()
+    bracket = find_bracket(f, [-3, 3], n=10, ifplot=True) #get bracket and plot
+    bracket = bracket[1::] # Only take the positive interval
+    plt.xlabel("x")
+    plt.ylabel("f(x)")
+    plt.title("f(x) with bracket")
+    plt.legend(["f(x)", "bracket"])
+    fig.savefig("f(x) with bracket.png", dpi=600) #save figure
+
+    nsol = len(bracket)
+
     # Call functions to solve respectively
     print("\n#########################\n")
     bisection_root = []

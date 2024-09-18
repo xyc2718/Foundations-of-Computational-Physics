@@ -318,7 +318,7 @@ Find the three lowest eigen states (both energies and wavefunctions).
 
 为了降低数值误差，本程序中能量单位采用$eV$,长度单位采用$nm$,并定义常数$k={2 m_e\over\hbar^2}=26.24684351 nm^{-1}\cdot eV^{-1}$
 
-本程序源文件为solvesqurepotential.py，在终端进入当前目录，使用命令python -u solvesqurepotential.py运行本程序。运行时请保证Python第三方库Numpy,Matplotlib已安装。程序开发环境为Python3.12.3，可在Python3.8以上版本中运行。
+本程序源文件为solvesqurepotential.py，在终端进入当前目录，使用命令python -u solvesqurepotential.py运行本程序。运行时请保证此程序与题目1程序findroot.py在同一文件夹下，且Python第三方库Numpy,Matplotlib已安装。程序开发环境为Python3.12.3，可在Python3.8以上版本中运行。
 
 \subsection{伪代码}
 \subsubsection{Trapezoidal integrate 伪代码:}
@@ -362,25 +362,25 @@ Find the three lowest eigen states (both energies and wavefunctions).
     \label{fig:6}
   \end{figure}
   \subsection{输入输出实例}
-  对于本程序，运行后会生成图\ref{fig:6}为"f\_even and f\_odd.png"和\ref{fig:7}为"wavefunction.png"于当前目录下，并输出三个束缚态的能量和波函数表达式。图\ref{fig:8}为程序运行截图。程序得到束缚态能量为$E_0=1.3569 eV,E_1=5.1989 eV,E_2=9.9254 eV$，波函数表达式分别为($x$单位为$nm$)
+  对于本程序，运行后会生成图\ref{fig:6}为"f\_even and f\_odd.png"和\ref{fig:7}为"wavefunction.png"于当前目录下，并输出三个束缚态的能量和波函数表达式。图\ref{fig:8}为程序运行截图。程序得到束缚态能量为$E_0=1.35689 eV,E_1=5.19897 eV,E_2=9.92541 eV$，波函数表达式分别为($x$单位为$nm$)
    
 
 $$
-  \psi_0(x) = 
-  \begin{cases} 
-  14.5125 \cdot e^{-15.062x}, & \text{for } x > a \\
-  14.5125 \cdot e^{15.062x}, & \text{for } x < -a \\
-  1.9375 \cdot \cos(5.968x), & \text{for } -a < x < a 
-  \end{cases}
-  $$
+\psi_0(x) = 
+\begin{cases} 
+14.51282 \, e^{-15.06168 \, x}, & x > a \\
+14.51282 \, e^{15.06168 \, x}, & x < -a \\
+1.93748 \, \cos(5.96776 \, x), & -a \leq x \leq a
+\end{cases}
+$$
   
 
   $$
   \psi_1(x) = 
   \begin{cases} 
-  12.6616 \cdot e^{-11.226x}, & \text{for } x > a \\
-  -12.6616 \cdot e^{11.226x}, & \text{for } x < -a \\
-  1.8599 \cdot \sin(11.681x), & \text{for } -a < x < a 
+  12.66141 \, e^{-11.22550 \, x}, & x > a \\
+  -12.66141 \, e^{11.22550 \, x}, & x < -a \\
+  1.85990 \, \sin(11.68146 \, x), & -a \leq x \leq a
   \end{cases}
   $$
   
@@ -388,9 +388,9 @@ $$
   $$
   \psi_2(x) = 
   \begin{cases} 
-  1.3814 \cdot e^{-1.399x}, & \text{for } x > a \\
-  1.3814 \cdot e^{1.399x}, & \text{for } x < -a \\
-  -1.0482 \cdot \cos(16.140x), & \text{for } -a < x < a 
+    1.38157 \, e^{-1.39923 \, x}, & x > a \\
+    1.38157 \, e^{1.39923 \, x}, & x < -a \\
+  -1.04824 \, \cos(16.14034 \, x), & -a \leq x \leq a
   \end{cases}
   $$
   
