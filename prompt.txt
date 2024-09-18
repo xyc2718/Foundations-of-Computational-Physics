@@ -1,0 +1,61 @@
+请一下是一段伪代码格式示范,我需要你仿照其将我的代码转换为伪代码,并且注意一下要点:
+1.Function的用法为Fucntion{func}{input}，并且以\EndFunction结束，if的用法为If{condition}并且以\EndIf结束
+2.变量名称不要以下划线分割，若程序中出现含下滑线变量名，请将其转换为驼峰命名法
+3.原样保留源代码中的注释
+4.除了函数的输入和输出外，略过声明变量的部分
+5.请以INPUT,和OUTPUT标注输入输出,例如    
+\State \textbf{INPUT:} $array$(2D array of calculator24)  
+\State \textbf{OUTPUT:} $pairs$(2D array of calculator24)
+6.调用函数请使用小括号,如func1($x1,x2$);从数组中取值请使用中括号,如$array[i]$。
+7.变量名和数组名前后请使用$$，不要使用\textit{}。变量的赋值格式为:State $i \gets$  $R$;这一条也包括for循环中的赋值，即\For{$i \gets$ $1$ \To $n$}
+8.请格外注意，调用函数时函数名不应斜体，如果要表示将函数计算结果赋值给x，则应写为$x \gets$ f($y$);
+9.条件语句中仍应该为等号，即\If{$x=1$}
+10.忽略了具体的语法，专注于描述逻辑流程,你可以适当删减不重要的部分
+    ```pseudo
+    \begin{algorithm}
+\caption{ReducePair}
+\begin{algorithmic}
+  \Function{ReducePair}{$array$}
+    \State \textbf{INPUT:} $array$ (2D array of calculator24)
+    \State \textbf{OUTPUT:} reducedPair (n $\times 1$ 2D array of calculator24)
+    \State $maxIter \gets 100$ \Comment{Limit maximum number of iterations}
+    \State $reducedPair \gets$ ReducePairStep(GeneratePairs($array$))
+    \For{$i \gets 1$ \To $maxIter$}
+      \State $reducedPair \gets$ ReducePairStep(GeneratePairs($reducedPair$))
+      \If {size($reducedPair$, 2) = $1$} \Comment{If only one column remains, return}
+        \State \Return
+      \EndIf
+    \EndFor
+  \EndFunction
+\end{algorithmic}
+\end{algorithm}
+    ```
+以下为需要转换的代码:
+ program main
+   use calculator24_module
+   integer, parameter :: num_elements = 4 ! Number of input elements
+   real, parameter :: cal_value = 24.0    ! Target value for calculation
+   integer :: input_array(num_elements)
+   type(calculator24) :: type_array(1, num_elements)
+   type(calculator24), allocatable :: reduced_pair(:,:)
+   type(calculator24) :: answer
+   
+   print *, 'Enter the elements:'   ! Read input
+   
+   do i = 1, num_elements
+        read *, input_array(i)
+   end do
+
+   print *, 'Calculating...'
+
+   type_array = init_array(input_array) ! Initialize array
+   reduced_pair = reduce_pair(type_array) ! Iterative calculation
+   answer = match_value(reduced_pair(:,1), cal_value) ! Match result
+
+   print *, "The answer for", input_array, "is:" ! Output result
+   if (answer.expression == "none") then
+      print *, "No solution"
+   else
+      call answer%print()
+   end if
+   call system('pause')
