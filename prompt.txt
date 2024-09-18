@@ -11,8 +11,10 @@
 8.请格外注意，调用函数时函数名不应斜体，如果要表示将函数计算结果赋值给x，则应写为$x \gets$ f($y$);
 9.条件语句中仍应该为等号，即\If{$x=1$}
 10.忽略了具体的语法，专注于描述逻辑流程,你可以适当删减不重要的部分
-    ```pseudo
-    \begin{algorithm}
+11.如果遇到了for...else的结构，请不要使用关键字\Else或\Else For,使用\State \textbf{else for}实现
+12.Break,Print,Raise,Continue等非结构关键字不要使用\Break{}命令，请使用\textbf{Break}实现
+ 
+\begin{breakablealgorithm}
 \caption{ReducePair}
 \begin{algorithmic}
   \Function{ReducePair}{$array$}
@@ -28,34 +30,20 @@
     \EndFor
   \EndFunction
 \end{algorithmic}
-\end{algorithm}
-    ```
-以下为需要转换的代码:
- program main
-   use calculator24_module
-   integer, parameter :: num_elements = 4 ! Number of input elements
-   real, parameter :: cal_value = 24.0    ! Target value for calculation
-   integer :: input_array(num_elements)
-   type(calculator24) :: type_array(1, num_elements)
-   type(calculator24), allocatable :: reduced_pair(:,:)
-   type(calculator24) :: answer
-   
-   print *, 'Enter the elements:'   ! Read input
-   
-   do i = 1, num_elements
-        read *, input_array(i)
-   end do
+\end{breakablealgorithm}
 
-   print *, 'Calculating...'
-
-   type_array = init_array(input_array) ! Initialize array
-   reduced_pair = reduce_pair(type_array) ! Iterative calculation
-   answer = match_value(reduced_pair(:,1), cal_value) ! Match result
-
-   print *, "The answer for", input_array, "is:" ! Output result
-   if (answer.expression == "none") then
-      print *, "No solution"
-   else
-      call answer%print()
-   end if
-   call system('pause')
+以下为需要转换的python代码:
+def int_Trapezoidal(f,a,b,n):
+    """
+    integrate the function f by Trapezoidal method
+    :param f: function
+    :param a: lower limit
+    :param b: upper limit
+    :param n: number of points
+    """
+    x=np.linspace(a,b,n+1,dtype=np.float64)
+    intfx=(np.sum([f(i) for i in x])-1/2*f(x[0])-1/2*f(x[-1]))*(b-a)/n
+    return intfx
+E1,err1=bisection_method(f_even,bracket_even[0]);
+E2,err2=bisection_method(f_odd,bracket_odd[0]);
+E3,err3=bisection_method(f_even,bracket_even[1]);
