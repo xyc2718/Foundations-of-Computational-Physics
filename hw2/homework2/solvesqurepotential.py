@@ -56,7 +56,7 @@ def int_Trapezoidal(f,a,b,n):
     intfx=(np.sum([f(i) for i in x])-1/2*f(x[0])-1/2*f(x[-1]))*(b-a)/n
     return intfx
 
-def print_even(E,i):
+def print_even(E,i,norm):
     """
     print the expression of wave function of even parity\
     """
@@ -64,11 +64,10 @@ def print_even(E,i):
     C=F=1
     B=np.e**(-beta*a)/np.cos(np.sqrt(k*a**2*E))
     print(f"\nwave function of E{i}={E:.5f}eV:")
-    norm=np.sqrt(int_Trapezoidal(lambda x:wave_even(x,E)**2,-10*a,10*a,10000))
     print(f"{F/norm:.{5}f} Exp(-{beta:.5f}*x) for x>a")
     print(f"{C/norm:.{5}f} Exp({beta:.5f}*x) for x<-a")
     print(f"{B/norm:.{5}f} cos({np.sqrt(k*E):.5f}*x) for -a<x<a")
-def print_odd(E,i):
+def print_odd(E,i,norm):
     """
     print the expression of wave function of odd parity
     """
@@ -77,7 +76,6 @@ def print_odd(E,i):
     C=-F
     A=np.e**(-beta*a)/np.sin(np.sqrt(k*a**2*E))
     print(f"\nwave function of E{i}={E:.5f}eV:")
-    norm=np.sqrt(int_Trapezoidal(lambda x:wave_odd(x,E)**2,-10*a,10*a,10000))
     print(f"{F/norm:.{5}f} Exp(-{beta:.5f}*x) for x>a")
     print(f"{C/norm:.{5}f} Exp({beta:.5f}*x) for x<-a")
     print(f"{A/norm:.{5}f} sin({np.sqrt(k*E):.5f}*x) for -a<x<a")
@@ -99,28 +97,34 @@ if __name__=="__main__":
     E2,err2=bisection_method(f_odd,bracket_odd[0],tol=1e-8);
     E3,err3=bisection_method(f_even,bracket_even[1],tol=1e-8);
 
-    #output the expression of wave function
-    print_even(E1,0)
-    print_odd(E2,1)
-    print_even(E3,2)
 
-    ##plot wave function
+    ##plot wave function and output the expression
+    #wave function1
     fig2=plt.figure(figsize=(16,4))
     plt.subplot(131)
     x=np.linspace(-5*a,5*a,1000)
-    plt.plot(x,[wave_even(i,E1) for i in x])
+    norm=np.sqrt(int_Trapezoidal(lambda x:wave_even(x,E1)**2,-50*a,50*a,100000))#normalize the wave function
+    print_even(E1,0,norm) #output the expression of wave function
+    plt.plot(x,[wave_even(i,E1)/norm for i in x])#plot the wave function
     plt.title(f"wave function of E0={E1:.5f}eV")
     plt.xlabel("x(nm)")
     plt.ylabel(r"$\psi_0$")
+
+    #wave function2
     plt.subplot(132)
     x=np.linspace(-5*a,5*a,1000)
-    plt.plot(x,[wave_odd(i,E2) for i in x])
+    norm=np.sqrt(int_Trapezoidal(lambda x:wave_odd(x,E2)**2,-50*a,50*a,100000))#normalize the wave function
+    print_odd(E2,0,norm)#output the expression of wave function
+    plt.plot(x,[wave_odd(i,E2)/norm for i in x])#plot the wave function
     plt.title(f"wave function of E1={E2:.5f}eV")
     plt.xlabel("x(nm)")
     plt.ylabel(r"$\psi_1$")
+
+    #wave function3
     plt.subplot(133)
-    x=np.linspace(-5*a,5*a,10000)
-    plt.plot(x,[wave_even(i,E3) for i in x])
+    norm=np.sqrt(int_Trapezoidal(lambda x:wave_even(x,E3)**2,-50*a,50*a,100000)) #normalize the wave function
+    print_even(E3,0,norm)#output the expression of wave function
+    plt.plot(x,[wave_even(i,E3)/norm for i in x])#plot the wave function
     plt.title(f"wave function of E2={E3:.5f}eV")
     plt.xlabel("x(nm)")
     plt.ylabel(r"$\psi_2$")

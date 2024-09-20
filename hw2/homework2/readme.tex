@@ -70,7 +70,7 @@ Sketch the function$x^3-5x+3=0$
 \end{figure}
 
 \subsection{程序描述}
-对于题目要求求解的方程，我们首先通过在一定范围内均匀采样(一般采样10个点)找到其变号区间，在程序中由$find\_bracket$完成(见图\ref{fig:1})。对于1.1题，我们使用$bisection\_method$函数接收其变号区间，并在区间内使用二分法逼近其中的根，直到误差在容差$10^(-4)$以下，这里根的误差使用二分区间大小$|a-b|$估计。对于1.2和1.3题，由于np.float64类型浮点数的精度大约只有16位有效位数左右，因此我们使用decimal库实现50位有效数字的计算。我们在$newton_raphson_method$和$hybrid_method$函数中接收由1.1中得到的解，将其误差缩小至$10^(-14)$以下，这里误差我们使用$|f(x)/f'(x)|$估计。
+对于题目要求求解的方程，我们首先通过在一定范围内均匀采样(一般采样10个点)找到其变号区间，在程序中由$find\_bracket$完成(见图\ref{fig:1})。对于1.1题，我们使用$bisection\_method$函数接收其变号区间，并在区间内使用二分法逼近其中的根，直到误差在容差$10^{-4}$以下，这里根的误差使用二分区间大小$|a-b|$估计。对于1.2和1.3题，由于np.float64类型浮点数的精度大约只有16位有效位数左右，因此我们使用decimal库实现50位有效数字的计算。我们在$newton_raphson_method$和$hybrid_method$函数中接收由1.1中得到的解，将其误差缩小至$10^(-14)$以下，这里误差我们使用$|f(x)/f'(x)|$估计。
 
 本程序源文件为findroot.py，在终端进入当前目录，使用命令
 \Colorbox{cmdbg}{\lstinline[language=bash]|python -u findroot.py|}
@@ -314,7 +314,7 @@ Find the three lowest eigen states (both energies and wavefunctions).
 \subsection{程序描述}
 在本程序中，我们通过求解奇、偶宇称的波函数的边界条件方程:$f_{odd}=\alpha sin \alpha a+\beta cos \alpha a=0$和$f_{even}=\alpha sin\alpha a+\beta cos\alpha=0$,其中$\alpha =\sqrt{2 m E}/\hbar^2,\beta=\sqrt{2 m(V_0-E)}/\hbar$,得到波函数的三个能量最小的束缚态(由图\ref{fig:6}可看出事实上只存在3个束缚态)。
 
-对$f_{even}$和$f_{odd}$的求根使用在题目1中实现的$bisection\_method$实现，并重新计算出A,B,C,D系数得到波函数。接着对波函数的平方进行积分，将波函数归一化。积分在$int_Trapezoidal$中使用梯形法实现，即$N_e=h(1/2 \rho_0+rho_1+...+\rho_{N-1}+1/2\rho_N)$,其中$h={b-a\over N},a,b$为上下界，$N$为采样点数。由于$|x|>a$波函数为指数下降，因此我们对波函数在$|x|>10a$处截断。
+对$f_{even}$和$f_{odd}$的求根使用在题目1中实现的$bisection\_method$实现，并重新计算出A,B,C,D系数得到波函数。接着对波函数的平方进行积分，将波函数归一化。积分在$int_Trapezoidal$中使用梯形法实现，即$N_e=h(1/2 \rho_0+rho_1+...+\rho_{N-1}+1/2\rho_N)$,其中$h={b-a\over N},a,b$为上下界，$N$为采样点数。由于$|x|>a$波函数为指数下降，因此我们对波函数在$|x|>50a$处截断。
 
 为了降低数值误差，本程序中能量单位采用$eV$,长度单位采用$nm$,并定义常数$k={2 m_e\over\hbar^2}=26.24684351 nm^{-1}\cdot eV^{-1}$
 
@@ -362,7 +362,7 @@ Find the three lowest eigen states (both energies and wavefunctions).
     \label{fig:6}
   \end{figure}
   \subsection{输入输出实例}
-  对于本程序，运行后会生成图\ref{fig:6}为"f\_even and f\_odd.png"和\ref{fig:7}为"wavefunction.png"于当前目录下，并输出三个束缚态的能量和波函数表达式。图\ref{fig:8}为程序运行截图。程序得到束缚态能量为$E_0=1.35689 eV,E_1=5.19897 eV,E_2=9.92541 eV$，波函数表达式分别为($x$单位为$nm$)
+  对于本程序，运行后会生成图\ref{fig:6}为"f\_even and f\_odd.png"和图\ref{fig:7}为"wavefunction.png"于当前目录下，并输出三个束缚态的能量和波函数表达式。图\ref{fig:8}为程序运行截图。程序得到束缚态能量为$E_0=1.35689 eV,E_1=5.19897 eV,E_2=9.92541 eV$，波函数表达式分别为($x$单位为$nm$)
    
 
 $$
@@ -388,9 +388,9 @@ $$
   $$
   \psi_2(x) = 
   \begin{cases} 
-    1.38157 \, e^{-1.39923 \, x}, & x > a \\
-    1.38157 \, e^{1.39923 \, x}, & x < -a \\
-  -1.04824 \, \cos(16.14034 \, x), & -a \leq x \leq a
+    1.37808 \, e^{-1.39923 \, x}, & x > a \\
+    1.37808 \, e^{1.39923 \, x}, & x < -a \\
+  -1.04560 \, \cos(16.14034 \, x), & -a \leq x \leq a
   \end{cases}
   $$
   
