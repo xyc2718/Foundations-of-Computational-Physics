@@ -246,7 +246,7 @@
     \centering
     \includegraphics[width=0.8\linewidth]{photo/figp1.png}
     \caption{题目1程序运行截图}
-    \label{fig:6}
+    \label{fig:7}
   \end{figure}
   
 \section{题目2}
@@ -392,7 +392,7 @@ V_eff(j)=V(r_j)+\frac{l(l+1)}{2 r_j^2}
     \end{breakablealgorithm}
     
 \section{输入输出实例}
-运行本程序后，将在控制台输出由1000个格点采用均匀和非均匀网格求解的H和Li的最低的三个能级能量（其中H存在简并）。并生成由非均匀网格求解的H和Li的$n=1,2,3,4$不同$l$的$u(r)=rR(r)$的图像如图\ref{fig:wavefunctionsH}和\ref{fig:wavefunctionsLi}，为"wavefunctionsH.png"和"wavefunctionsLi.png"于当前路径下。此外还将输出Li的势能曲线和网格间距变化图(图\ref{fig:potentialLi}\ref{fig:ununiformgrid})为"potentialLi.png"和"ununiformgrid.png"于当前路径下。
+运行本程序后，将在控制台输出由1000个格点采用均匀和非均匀网格求解的H和Li的最低的三个能级能量（其中H存在简并）。并生成由非均匀网格求解的H和Li的$n=1,2,3,4$不同$l$的$u(r)=rR(r)$的图像如图\ref{fig:wavefunctionsH}和\ref{fig:wavefunctionsLi}，为"wavefunctionsH.png"和"wavefunctionsLi.png"于当前路径下。此外还将输出Li的势能曲线和网格间距变化图(图\ref{fig:potentialLi},\ref{fig:ununiformgrid})为"potentialLi.png"和"ununiformgrid.png"于当前路径下。
 最后，我们比较了$n=2,l=1$能级非均匀网格和均匀网格的收敛速率，如图\ref{fig:compare}，输出为"compare.png"于当前路径下。为保持格点间距变化速度一致，采用$\delta=5/jmax$
 可以看到相同格点数量下，非均匀网格求解的收敛速率和精度都要高于均匀网格，但是非均匀网格的H矩阵是非对称的，也将有更高的计算成本。
 
@@ -429,7 +429,7 @@ E_3=-30.3529eV ,n=2,l=0
 \begin{figure}
   \centering
   \includegraphics[width=1\linewidth]{photo/potentialLi.png}
-  \caption{Li原子势能曲线}
+  \caption{H和Li原子势能曲线}
   \label{fig:potentialLi}
 \end{figure}
 
