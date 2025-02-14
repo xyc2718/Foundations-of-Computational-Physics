@@ -13,6 +13,10 @@
 10.忽略了具体的语法，专注于描述逻辑流程,你可以适当删减不重要的部分
 11.如果遇到了for...else的结构，请不要使用关键字\Else或\Else For,使用\State \textbf{else for}实现
 12.Break,Print,Raise,Continue等非结构关键字不要使用\Break{}命令，请使用\textbf{Break}实现
+13.如果是一个类型class,请以\State \textbf{Class}开始，简写init部分，只需要在一行中列出属性即可，对于其中的一系列方法函数，请在所有方法之前写上\State \textbf{Method},之后的函数同样以Fucntion{func}{input}开始，并且以\EndFunction结束.注意：请不要使用\Method和\EndMethod
+14.在类型如如果出现self，请将其省略.如f(self,x)应为f(x),self.u应为u
+15.必要时请省略*
+16.若出现@,其表示矩阵乘法,\cdot
  
 \begin{breakablealgorithm}
 \caption{ReducePair}
@@ -33,17 +37,13 @@
 \end{breakablealgorithm}
 
 以下为需要转换的python代码:
-def int_Trapezoidal(f,a,b,n):
-    """
-    integrate the function f by Trapezoidal method
-    :param f: function
-    :param a: lower limit
-    :param b: upper limit
-    :param n: number of points
-    """
-    x=np.linspace(a,b,n+1,dtype=np.float64)
-    intfx=(np.sum([f(i) for i in x])-1/2*f(x[0])-1/2*f(x[-1]))*(b-a)/n
-    return intfx
-E1,err1=bisection_method(f_even,bracket_even[0]);
-E2,err2=bisection_method(f_odd,bracket_odd[0]);
-E3,err3=bisection_method(f_even,bracket_even[1]);
+def PRN(n,dim,rmin=0,rmax=1,seed=515): #伪随机数生成器
+    m = 2**31-1
+    a = 48271
+    b = 43
+    x = seed
+    result = []
+    for i in range(n*dim):
+        x = (a*x+b)%m
+        result.append((rmin+(rmax-rmin)*x/m))
+    return np.array(result).reshape(n,dim)
